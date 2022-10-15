@@ -1,4 +1,4 @@
-import { getTrending, getSearchMovies, getMovieDetails, getMovieCredits, getMovieRewiews } from "api/api"
+// import { getTrending, getSearchMovies, getMovieDetails, getMovieCredits, getMovieRewiews } from "api/api"
 
 export default function Movies() {
   return (
