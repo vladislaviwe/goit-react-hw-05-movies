@@ -7,7 +7,7 @@ const instance = axios.create({
     }
 })
 
-export const getTrending = async() => {
+export const getTrending = async(page) => {
     const { data } = await instance.get("/trending/movie/day");
     return data;
 }
@@ -31,7 +31,7 @@ export const getMovieCredits = async(id) => {
     return data;
 }
 
-export const getMovieRewiews = async(id) => {
+export const getMovieReviews = async(id) => {
     const { data } = await instance.get(`/movie/${id}/reviews`);
     return data;
 }
