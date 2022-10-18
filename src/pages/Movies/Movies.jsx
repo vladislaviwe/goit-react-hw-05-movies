@@ -1,16 +1,19 @@
 import { getSearchMovies } from "api/api"
 import { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom";
 
 import Loader from "components/Loader/Loader";
 import SearchBar from "components/SearchBar/SearchBar";
 import MoviesList from "components/MoviesList/MoviesList";
 
 export default function Movies() {
-    const [searchName, setSearchName] = useState("");
     const [movies, setMovies] = useState([]);
     const [isItems, setIsItems] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchQuery = searchParams.get("query");
 
     useEffect(() => {
         const fetchMovies = async() => {
@@ -18,8 +21,8 @@ export default function Movies() {
             setError(null);
             setIsItems(true);
             try {
-                const { results } = await getSearchMovies(searchName);
-                if (!results.length && searchName) {
+                const { results } = await getSearchMovies(searchQuery);
+                if (!results.length && searchQuery) {
                   setIsItems(false)
                   setMovies([]);
                   return;
@@ -33,13 +36,13 @@ export default function Movies() {
                 setLoading(false);
             }
         }
-        if (searchName) {
+        if (searchQuery) {
           fetchMovies();
         }
-    }, [searchName]);
+    }, [searchQuery]);
 
     const onSearch = (searchName) => {
-      setSearchName(searchName);
+        setSearchParams({query: searchName});
     }
 
     const isMovies = Boolean(movies.length);
@@ -50,7 +53,7 @@ export default function Movies() {
             {loading && <Loader />}
             {error && <b>Oops, something went wrong. Please try to reload the page</b>}
             {isMovies && <MoviesList items={movies}/>}
-            {!isMovies && !isItems && <b>There are no movies matching your search query "{searchName}"</b>}
+            {!isMovies && !isItems && <b>There are no movies matching your search query "{searchQuery}"</b>}
         </main>
     )
 }

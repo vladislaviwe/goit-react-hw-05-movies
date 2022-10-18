@@ -31,7 +31,7 @@ export default function Home() {
         <main>
             {loading && <Loader />}
             {error && <h2>Oops, something went wrong. Please try to reload the page</h2>}
-            <h1>Trending today</h1>
+            {movies.length && <h1>Trending today</h1>}
             <MoviesList items={movies}/>
         </main>
     )

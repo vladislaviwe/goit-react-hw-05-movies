@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams, useNavigate, NavLink, Link, Outlet } from "react-router-dom";
+import { useParams, useNavigate, NavLink, Outlet, useLocation } from "react-router-dom";
 
 import Loader from "components/Loader/Loader";
 import MovieCard from "components/MovieCard/MovieCard";
@@ -15,6 +15,8 @@ export default function MovieDetails() {
 
     const { movieId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || "/";
     
     useEffect(() => {
         const fetchMovie = async() => {
@@ -34,12 +36,12 @@ export default function MovieDetails() {
         fetchMovie();
     }, [movieId]);
 
-    const goBack = () => navigate(-1);
+    const goBack = () => navigate(from);
 
     return (
         <>
             <div>
-                {movie && <Link onClick={goBack}>Go back</Link>}
+                {movie && <button onClick={goBack}>Go back</button>}
                 {loading && <Loader />}
                 {error && <h2>Oops, something went wrong. Please try to reload the page</h2>}
                 {movie && <MovieCard item={movie}/>}
@@ -47,10 +49,10 @@ export default function MovieDetails() {
             {movie && <div>
                 <NavMenu>
                     <NavItem>
-                        <NavLink to={'cast'}>Cast</NavLink>
+                        <NavLink state={{from}} to={'cast'}>Cast</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink to={'reviews'}>Reviews</NavLink>
+                        <NavLink state={{from}} to={'reviews'}>Reviews</NavLink>
                     </NavItem>
                 </NavMenu>
             </div>}

@@ -1,4 +1,5 @@
 import { Form, FormButton, FormButtonLabel, FormInput } from "./SearchFormStyled";
+import { HiOutlineSearch } from "react-icons/hi";
 
 import PropTypes from "prop-types";
 import { useState } from 'react';
@@ -24,7 +25,7 @@ export default function SearchForm({onSubmit}) {
   return (
     <Form onSubmit={handleSubmit}>
         <FormButton type="submit" onClick={handleSubmit}>
-            {/* <HiOutlineSearch /> */}
+            <HiOutlineSearch />
             <FormButtonLabel />
         </FormButton>
 
@@ -35,7 +36,7 @@ export default function SearchForm({onSubmit}) {
             type="text"
             autocomplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search movies"
             required
         />
     </Form>
