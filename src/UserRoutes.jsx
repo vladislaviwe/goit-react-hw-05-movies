@@ -1,9 +1,8 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
 const Home = lazy(() => import("pages/Home/Home"));
 const Movies = lazy(() => import("pages/Movies/Movies"));
-const NotFoundPage = lazy(() => import("pages/NotFoundPage/NotFoundPage"));
 const MovieDetails = lazy(() => import("pages/Movies/MovieDetails/MovieDetails"));
 const Cast = lazy(() => import("pages/Movies/Cast/Cast"));
 const Reviews = lazy(() => import("pages/Movies/Reviews/Reviews"));
@@ -20,7 +19,7 @@ export default function UserRoutes() {
                   <Route path="cast" element={<Cast />}/>
                   <Route path="reviews" element={<Reviews />}/>
               </Route>
-              <Route path="*" element={<NotFoundPage />}/>
+              <Route path="*" element={<Navigate to="/" />}/>
           </Route>
       </Routes>
     </Suspense>
