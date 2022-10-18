@@ -7,6 +7,9 @@ import MovieCard from "components/MovieCard/MovieCard";
 import { getMovieDetails } from "api/api";
 
 import { NavItem, NavMenu } from "components/Navbar/NavbarStyled";
+import { BackButton } from "./MovieDetailsStyled";
+
+import { IoArrowBackOutline } from "react-icons/io5";
 
 export default function MovieDetails() {
     const [movie, setMovie] = useState(null);
@@ -41,7 +44,7 @@ export default function MovieDetails() {
     return (
         <>
             <div>
-                {movie && <button onClick={goBack}>Go back</button>}
+                {movie && <BackButton onClick={goBack}><IoArrowBackOutline></IoArrowBackOutline> Back</BackButton>}
                 {loading && <Loader />}
                 {error && <h2>Oops, something went wrong. Please try to reload the page</h2>}
                 {movie && <MovieCard item={movie}/>}

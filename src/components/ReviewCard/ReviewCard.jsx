@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 
 const ReviewCard = ({ items }) => {
     const element = items.map(({ author, content, id }) => 
@@ -9,3 +10,11 @@ const ReviewCard = ({ items }) => {
   }
   
   export default ReviewCard;
+
+  ReviewCard.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+        author: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired
+    }))
+  }

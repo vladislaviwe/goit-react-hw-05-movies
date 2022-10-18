@@ -4,7 +4,7 @@ import { getMovieReviews } from "api/api"
 import ReviewCard from "components/ReviewCard/ReviewCard";
 
 export default function Reviews() {
-    const [review, setReview] = useState(null);
+    const [review, setReview] = useState([]);
     const [error, setError] = useState(null);
 
     const { movieId } = useParams();
@@ -27,8 +27,8 @@ export default function Reviews() {
   return (
     <div>
         {error && <h2>Oops, something went wrong. Please try to reload the page</h2>}
-        {review && <ReviewCard items={review}/>}
-        {!review && <b>There are no reviews for this movie yet</b>}
+        {review.length > 0 && <ReviewCard items={review}/>}
+        {!review.length && <b>There are no reviews for this movie yet</b>}
     </div>
   )
 }

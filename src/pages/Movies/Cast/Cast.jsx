@@ -23,7 +23,6 @@ export default function Cast() {
         }
         fetchMovie();
     }, [movieId]);
-    
 
   return (
     <div>
